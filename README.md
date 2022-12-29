@@ -1,10 +1,11 @@
-# Projeto-de-automa-o-botcity
+# Desafio de Automação da BWA
 
-Projeto criado para cumprir um desafio de programação (posteriormente será transfomado em um repositório exemplo)
-(projeto falhou no praso de entrega do desafio e nos requerimentos)
+Projeto criado para cumprir um desafio de automação da BWA
 
-Embreve:
+Ferramentas ultilizada:
+- Linguagem Python
+- Selenium
 
-- como instalar
-- automação na web
-- automação no desktop
+Passo-a-passo para rodar o teste
+(Crie o venv)
+(rode requirements)
