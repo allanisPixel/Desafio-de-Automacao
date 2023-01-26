@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 # Varivael i muda o comportamento do teste
+# drive wait
 # (Se 1 é a 1º playlist, se 1 é a 2º Playlist)
 
 lista1 = 'This is 2Pac'
@@ -19,7 +20,7 @@ driver = webdriver.Chrome(
 )
 
 
-for i in range(1): #2
+for i in range(2): #2
     email = "alanisisabelle@gmail.com"
     senha = "azaleia987654123"
 
@@ -33,7 +34,7 @@ for i in range(1): #2
     enter = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[5]/button[2]')
     enter.click()
 
-    sleep(10)
+    sleep(5)
     
     login = driver.find_element(By.ID, "login-username")
     password = driver.find_element(By.ID, "login-password")
@@ -41,57 +42,101 @@ for i in range(1): #2
     (login).send_keys(email)
     login.click
     (password).send_keys(senha)
-
     #checkbox = driver.find_element(By.ID, "login-remember")
     checkbox = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div[3]/div[1]/div/label/span[1]")
     checkbox.click()
-
-    sleep(15)
-
+    sleep(5)
     #enter1 = driver.find_element(By.ID, "login-button")
     enter = driver.find_element(By.XPATH, '//*[@id="login-button"]')
     enter.click()
-    
     ##
     sleep(15)
 
     # Realizando busca
 
-    busca = driver.find_element(By.XPATH, '/html/body/div[4]/div/div[2]/div[1]/header/div[3]/div/div/form/input')
+    buton =driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/nav/div[1]/ul/li[2]/a')
+    buton.click()
+
 
     sleep(10)
-
+    busca = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[3]/div/div/form/input')
+    #conserte esse selector
     i = {
 
         0: (busca).send_keys(lista1),
         1: (busca).send_keys(lista3),
 
     }
-    busca.submit
-
-    select = driver.find_elements(By.XPATH, '/html/body/div[4]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div[1]/div/div/div/div[1]/div/a[4]')
-    select.click()
- 
-    sleep(10)
-
-    select = driver.find_element(By.XPATH, "//*[contains(text(), lista1 )]")
-    select.click()
-    sleep(90)
+    sleep(3)
 
     if i == 0:
-        select = driver.find_element(By.XPATH, "//*[contains(text(), 'This is 2Pac' )]")
-        select.click()
+        select = driver.find_elements(By.XPATH, "//*[contains(text(), 'This Is 2Pac' )]")
+        select[1].click()
         
 
     elif i == 1:
-        select = driver.find_element(By.XPATH, "//*[contains(text(), 'ELETRÔNICAS 2022 ⚡ MAIS TOCADAS' )]")
-        select.click()
+        '''
+        outra forma de fazer isso:
+        select = driver.find_elements(By.XPATH, "//*[contains(text(), 'ELETRÔNICAS 2022 ⚡ MAIS TOCADAS' )]")[0].click
 
+        '''
+        select = driver.find_elements(By.XPATH, "//*[contains(text(), 'ELETRÔNICAS 2022 ⚡ MAIS TOCADAS' )]")
+        select[1].click()
 
     else: 
         print('falhou')
 
-    sleep(90)
-    #
+    sleep(10)
+
+    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[2]/button[1]')
+
+
+    for x in range (10):
+        if buton.get_attribute != 'disabled' :
+            buton.click()
+        else: 
+            sleep(100)
+            x = x - 1
+
+    select = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
+    select.click()
+
+    for x in range (2):
+        if buton.get_attribute != 'disabled' :
+            buton.click()
+        else: 
+            sleep(100)
+            x = x - 1
+
+    select = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[1]/button[2]')
+
+    for x in range(5):
+        if buton.get_attribute != 'disabled' :
+            buton.click()
+        else: 
+            sleep(100)
+            x = x - 1
+
+    '''
+    select = driver.find_element(By.CSS_SELECTOR, ' #main > div > div')
+
+
+    //*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]
+
+    
+    css selector
+
+    # path do inicio da lista
+
+    //*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]
+
+    
+    '''
+
+
+        # se o botão disable espere
+        #volte pra primeira
+        #avance 2
+        #volte 5
     
     
