@@ -38,6 +38,7 @@ for i in range(2): #2
     #acessando site
     #driver = webdriver.Chrome()
     driver.get('https://open.spotify.com/')
+    driver
     
     sleep(3)
 
@@ -101,29 +102,31 @@ for i in range(2): #2
      
     #acha o item 1 e seleciona
 
-    buton = driver.find_element(By.XPATH, '/html/body/div[4]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
+    #buton = driver.find_element(By.XPATH, '/html/body/div[4]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
+    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[2]/div[4]/div/div/div/div/div/button/span')
     buton.click()
     sleep(1)
-    buton2 = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
-    buton2.click()
+    #buton2 = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
+    #buton2.click()
 
     sleep(5)
     #pular 10
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[2]/button[1]')
-    for x in range (10):
+    for x in range (9):
         sleep(3)
         if buton.get_attribute != 'disabled' :
             buton.click()
         else: 
-            sleep(100)
+            sleep(50)
             x = x - 1
     
     sleep(6)
     #volte para o 1º
-    buton = driver.find_element(By.XPATH, '/html/body/div[4]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
+    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
     buton.click()
     sleep(2)
-    buton2 = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
+    #buton2 = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
+    buton2 = driver.find_element(By.XPATH,'//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
     buton2.click()
 
     #pule 2
@@ -133,22 +136,24 @@ for i in range(2): #2
         if buton.get_attribute != 'disabled' :
             buton.click()
         else: 
-            sleep(100)
+            sleep(50)
             x = x - 1
 
     #volte 5
-    select = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[1]/button[2]')
+    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[1]/button[2]')
 
     for x in range(5):
-        sleep(3)
+        sleep(1)
         if buton.get_attribute != 'disabled' :
             buton.click()
         else: 
-            sleep(100)
+            sleep(50)
             x = x - 1
 
     sleep(10)
     print("Feito!!")
+    driver.delete_all_cookies()
+    #driver.close()
 
     
     
