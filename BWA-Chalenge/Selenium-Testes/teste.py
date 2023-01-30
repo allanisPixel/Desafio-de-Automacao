@@ -1,5 +1,7 @@
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver import ActionChains
 
 
@@ -29,22 +31,31 @@ driver = webdriver.Chrome(
 )
 driver.delete_all_cookies()
 
+
+#
+def doc_initialised(driver):
+    return driver.execulte_script("return initialised")
+#
+
 #use como parametro a lista das playlists
 for i in range(2): #2
     email = "baknurelte@gufum.com"
     senha = "dummy333"
 
     #acessando site
+
+    #
     driver.get('https://open.spotify.com/')
-    driver
+    WebDriverWait(driver, timeout=10).until(ec.new_window_is_opened)
+    #
     
-    sleep(3)
+    #sleep(3)
 
     # Log-in
     enter = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[5]/button[2]')
     enter.click()
 
-    sleep(5)
+    sleep(3)
     
     login = driver.find_element(By.ID, "login-username")
     password = driver.find_element(By.ID, "login-password")
@@ -54,16 +65,21 @@ for i in range(2): #2
     (password).send_keys(senha)
     checkbox = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div[3]/div[1]/div/label/span[1]")
     checkbox.click()
+    
     sleep(3)
+
     enter = driver.find_element(By.XPATH, '//*[@id="login-button"]')
+    WebDriverWait(enter, timeout=10).until(ec.element_located_to_be_selected)
     enter.click()
-    ##
-    sleep(8)
+
+    
+    #sleep(8)
 
     # Realizando busca
 
-    buton =driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/nav/div[1]/ul/li[2]/a')
-    buton.click()
+    #buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/nav/div[1]/ul/li[2]/a')
+    WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="main"]/div/div[2]/nav/div[1]/ul/li[2]/a'))).click()
+    #buton.click()
 
     sleep(5)
     busca = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[3]/div/div/form/input')
@@ -112,7 +128,7 @@ for i in range(2): #2
             sleep(50)
             x = x - 1
     
-    sleep(6)
+    sleep(5)
     #volte para o 1º
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
     buton.click()
