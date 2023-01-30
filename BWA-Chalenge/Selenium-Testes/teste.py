@@ -27,8 +27,7 @@ driver = webdriver.Chrome(
     service=service,
     options=options
 )
-
-#joguer o login no lixo pro segundo looping acontecer ou abra outra janela
+driver.delete_all_cookies()
 
 #use como parametro a lista das playlists
 for i in range(2): #2
@@ -36,7 +35,6 @@ for i in range(2): #2
     senha = "dummy333"
 
     #acessando site
-    #driver = webdriver.Chrome()
     driver.get('https://open.spotify.com/')
     driver
     
@@ -54,11 +52,9 @@ for i in range(2): #2
     (login).send_keys(email)
     login.click
     (password).send_keys(senha)
-    #checkbox = driver.find_element(By.ID, "login-remember")
     checkbox = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div[3]/div[1]/div/label/span[1]")
     checkbox.click()
     sleep(3)
-    #enter1 = driver.find_element(By.ID, "login-button")
     enter = driver.find_element(By.XPATH, '//*[@id="login-button"]')
     enter.click()
     ##
