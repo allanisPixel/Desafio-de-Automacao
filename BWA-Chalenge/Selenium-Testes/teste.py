@@ -32,8 +32,8 @@ driver = webdriver.Chrome(
 
 #use como parametro a lista das playlists
 for i in range(2): #2
-    email = "alanisisabelle@gmail.com"
-    senha = "azaleia987654123"
+    email = "baknurelte@gufum.com"
+    senha = "dummy333"
 
     #acessando site
     #driver = webdriver.Chrome()
