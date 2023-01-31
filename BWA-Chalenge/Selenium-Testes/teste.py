@@ -4,14 +4,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver import ActionChains
 
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from time import sleep
 
-# Varivael i muda o comportamento do teste
-# drive wait
+# drive, wait
 # (Se 1 é a 1º playlist, se 1 é a 2º Playlist)
 # arquivo config/acessar dado da planilha
 
@@ -31,91 +29,54 @@ driver = webdriver.Chrome(
 )
 driver.delete_all_cookies()
 
-
-#
-def doc_initialised(driver):
-    return driver.execulte_script("return initialised")
-#
-
 #use como parametro a lista das playlists
 for i in range(2): #2
     email = "baknurelte@gufum.com"
     senha = "dummy333"
 
     #acessando site
-
-    #
     driver.get('https://open.spotify.com/')
     WebDriverWait(driver, timeout=10).until(ec.new_window_is_opened)
-    #
-    
-    #sleep(3)
 
     # Log-in
-    enter = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[5]/button[2]')
-    enter.click()
-
-    sleep(3)
-    
-    login = driver.find_element(By.ID, "login-username")
-    password = driver.find_element(By.ID, "login-password")
-    login.click
-    (login).send_keys(email)
-    login.click
-    (password).send_keys(senha)
-    checkbox = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div[3]/div[1]/div/label/span[1]")
-    checkbox.click()
-    
-    sleep(3)
-
-    enter = driver.find_element(By.XPATH, '//*[@id="login-button"]')
-    WebDriverWait(enter, timeout=10).until(ec.element_located_to_be_selected)
-    enter.click()
-
-    
-    #sleep(8)
+    WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[5]/button[2]'))).click()
+    WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.ID, "login-username"))).send_keys(email)
+    WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.ID, "login-password"))).send_keys(senha)
+    checkbox = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div[3]/div[1]/div/label/span[1]").click()
+    sleep(5)
+    WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="login-button"]'))).click()
 
     # Realizando busca
-
-    #buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/nav/div[1]/ul/li[2]/a')
     WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="main"]/div/div[2]/nav/div[1]/ul/li[2]/a'))).click()
-    #buton.click()
+    busca = WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[3]/div/div/form/input')))
 
-    sleep(5)
-    busca = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[3]/div/div/form/input')
     if i == 0:
         (busca).send_keys(lista1)
+        sleep(3)
+        # Forma 1 de se fazer
+        driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista1}' )]")[1].click()
+
     elif i == 1:
-        (busca).send_keys(lista3),
+        (busca).send_keys(lista3)
+        sleep(5)
+        # forma 2 de se fazer
+
+        #WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, f"//*[contains(text(), '{lista3}')]" )))[1].click()
+   
+        select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
+        try:
+            y=1
+            select[y].click()
+        except:
+            y=+1
+            select[y].click()  
+
     else:
         print("Erro")
 
-    sleep(3)
-
-    #Encontra a playlist na pagina e seleciona ela
-
-    if i == 0:
-        select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista1}' )]")
-        select[1].click()
-        
-    elif i == 1:
-        '''
-        outra forma de fazer isso:
-        select = driver.find_elements(By.XPATH, "//*[contains(text(), 'ELETRÔNICAS 2022 ⚡ MAIS TOCADAS' )]")[1].click
-
-        '''
-        select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
-        select[1].click()
-
-    else: 
-        print('falhou')
-
-    sleep(5)
-     
+    sleep(15)
     #acha o item 1 e seleciona
-
-    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[2]/div[4]/div/div/div/div/div/button/span')
-    buton.click()
+    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[2]/div[4]/div/div/div/div/div/button/span').click()
 
     sleep(5)
     #pular 10
@@ -130,12 +91,9 @@ for i in range(2): #2
     
     sleep(5)
     #volte para o 1º
-    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div')
-    buton.click()
+    buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/span').click()
     sleep(2)
-    #buton2 = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
-    buton2 = driver.find_element(By.XPATH,'//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button')
-    buton2.click()
+    driver.find_element(By.XPATH,'//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/button').click()
 
     #pule 2
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[2]/button[1]')
@@ -149,7 +107,6 @@ for i in range(2): #2
 
     #volte 5
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[1]/button[2]')
-
     for x in range(5):
         sleep(1)
         if buton.get_attribute != 'disabled' :
@@ -161,7 +118,3 @@ for i in range(2): #2
     sleep(10)
     print("Feito!!")
     driver.delete_all_cookies()
-    #driver.close()
-
-    
-    
