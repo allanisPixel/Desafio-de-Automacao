@@ -64,12 +64,10 @@ for i in range(2): #2
         #WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, f"//*[contains(text(), '{lista3}')]" )))[1].click()
    
         select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
-        try:
-            y=1
-            select[y].click()
-        except:
-            y=+1
-            select[y].click()  
+        
+        y=1
+        select[y].click()
+
 
     else:
         print("Erro")
