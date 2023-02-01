@@ -42,6 +42,7 @@ for i in range(2): #2
     WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[5]/button[2]'))).click()
     WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.ID, "login-username"))).send_keys(email)
     WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.ID, "login-password"))).send_keys(senha)
+    
     checkbox = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div[3]/div[1]/div/label/span[1]").click()
     sleep(5)
     WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="login-button"]'))).click()
@@ -59,15 +60,12 @@ for i in range(2): #2
     elif i == 1:
         (busca).send_keys(lista3)
         sleep(5)
+
         # forma 2 de se fazer
-
         #WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, f"//*[contains(text(), '{lista3}')]" )))[1].click()
-   
-        select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
         
-        y=1
-        select[y].click()
-
+        select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
+        select[0].click()
 
     else:
         print("Erro")
