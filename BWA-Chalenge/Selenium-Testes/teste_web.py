@@ -9,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from time import sleep
 
-# drive, wait
+# drive
 # (Se 1 é a 1º playlist, se 1 é a 2º Playlist)
 # arquivo config/acessar dado da planilha
 
@@ -57,35 +57,26 @@ for i in range(2): #2
         # Forma 1 de se fazer
         driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista1}' )]")[1].click()
 
-    elif i == 1:
+    else:
         (busca).send_keys(lista3)
         sleep(5)
-
-        # forma 2 de se fazer
-        #WebDriverWait(driver, timeout=20).until(ec.element_to_be_clickable((By.XPATH, f"//*[contains(text(), '{lista3}')]" )))[1].click()
-        
+        # forma 2 de se fazer   
         select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
         select[0].click()
 
-    else:
-        print("Erro")
 
-    sleep(15)
+    sleep(6)
     #acha o item 1 e seleciona
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[2]/div[4]/div/div/div/div/div/button/span').click()
+    sleep(4)
 
-    sleep(5)
     #pular 10
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[2]/button[1]')
-    for x in range (9):
+    for x in range (10):
         sleep(3)
-        if buton.get_attribute != 'disabled' :
-            buton.click()
-        else: 
-            sleep(50)
-            x = x - 1
-    
+        WebDriverWait(driver, timeout=50).until(ec.element_to_be_clickable((buton))).click()
     sleep(5)
+
     #volte para o 1º
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/div[2]/main/div/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div/div[1]/div/span').click()
     sleep(2)
@@ -95,21 +86,13 @@ for i in range(2): #2
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[2]/button[1]')
     for x in range (2):
         sleep(3)
-        if buton.get_attribute != 'disabled' :
-            buton.click()
-        else: 
-            sleep(50)
-            x = x - 1
+        WebDriverWait(driver, timeout=50).until(ec.element_to_be_clickable((buton))).click()
 
     #volte 5
     buton = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/footer/div/div[2]/div/div[1]/div[1]/button[2]')
     for x in range(5):
-        sleep(1)
-        if buton.get_attribute != 'disabled' :
-            buton.click()
-        else: 
-            sleep(50)
-            x = x - 1
+        sleep(3)
+        WebDriverWait(driver, timeout=50).until(ec.element_to_be_clickable((buton))).click()
 
     sleep(10)
     print("Feito!!")
