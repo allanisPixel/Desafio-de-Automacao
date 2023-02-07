@@ -19,6 +19,11 @@ from time import sleep
 lista1 = 'This Is 2Pac'
 lista3 = 'ELETRÔNICAS 2022 ⚡ MAIS TOCADAS'
 
+email = "baknurelte@gufum.com"
+senha = "dummy333" 
+
+t=10
+
 service = Service(ChromeDriverManager().install())
 
 options = webdriver.ChromeOptions()
@@ -30,13 +35,19 @@ driver = webdriver.Chrome(
 driver.delete_all_cookies()
 
 #use como parametro a lista das playlists
-for i in range(2): #2
-    email = "baknurelte@gufum.com"
-    senha = "dummy333"
 
-    #acessando site
+def acessarSite(t):
     driver.get('https://open.spotify.com/')
-    WebDriverWait(driver, timeout=10).until(ec.new_window_is_opened)
+    WebDriverWait(driver, timeout=t).until(ec.new_window_is_opened)
+
+
+for i in range(2): #2
+    #acessando site
+    try:
+        acessarSite(t)
+
+    except:
+        acessarSite(t+10)
 
     # Log-in
     WebDriverWait(driver, timeout=10).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/header/div[5]/button[2]'))).click()
