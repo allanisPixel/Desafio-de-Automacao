@@ -13,8 +13,8 @@ from time import sleep
 # (Se 1 é a 1º playlist, se 1 é a 2º Playlist)
 # arquivo config/acessar dado da planilha
 
-#um arquivo guardando os xpaht e identicando quem são 
-#funções e tratamento de erros(registrar os exceptions)
+# um arquivo guardando os xpaht e identicando quem são 
+# funções e tratamento de erros(registrar os exceptions)
 
 lista1 = 'This Is 2Pac'
 lista3 = 'ELETRÔNICAS 2022 ⚡ MAIS TOCADAS'
@@ -63,7 +63,6 @@ for i in range(2): #2
         # forma 2 de se fazer   
         select = driver.find_elements(By.XPATH, f"//*[contains(text(), '{lista3}' )]")
         select[0].click()
-
 
     sleep(6)
     #acha o item 1 e seleciona
