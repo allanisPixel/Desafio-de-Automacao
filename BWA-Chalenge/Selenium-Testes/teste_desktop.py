@@ -8,6 +8,8 @@ from PIL import Image
 from pathlib import Path
 
 # largura por altuira 1366, 768
+# ctr sft W = deslogar
+# ativar venv no vs code = c:/Users/alanis.oliveira/Documents/Desafio-de-Automacao/BWA-Chalenge/venv/Scripts/Activate.ps1
 
 lista2 = 'This_RockMa1io_Sh***_62'
 lista3 = 'Drop the bass!!'
@@ -23,36 +25,39 @@ pa.press("enter")
 # 2. REALIZAR LOGIN
 
 path =  str (Path.cwd() / "Pyautogui" / "imagens" / "login" / "login.png")
-try: 
+#path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "busca1.png")
     #vai tentar achar a imagem
-    imagem = pa.locateOnScreen(path)
-
-except:
-    # Se logado, segue o baile
+imagem = pa.locateOnScreen(path)
+print(imagem)
+print(dir(imagem))
+if(imagem == None):
     print('logado :)')
-    
 
 else:
     # Se não tiver logado login
     print('não logado')
     path = (Path.cwd() / "Pyautogui" / "imagens" / "login" / "email.png") 
     email = pa.locateOnScreen(str(path))
-
-    pa.click(str(path))
+    pa.click(email) 
+    '''
     pa.press('delete', presses=20)
     pa.write("baknurelte@gufum.com")
+
+    '''
 
     path = str (Path.cwd() / "Pyautogui" / "imagens" / "login" / "senha.png")
     senha = pa.locateOnScreen(path)
 
-    pa.click(str(path))
+    pa.click(senha)
     pa.write("dummy333")
 
     path = str (Path.cwd() / "Pyautogui" / "imagens" / "login" / "entrar.png")
-    pa.click(str(path))
+    #######
+    pa.click(entrar)
 
     wait(10)
 
+'''
 # 3. PESQUISAR PLAYLIST 4 DA LISTA (PEDWQUISAR PLAYLIST 2 NA SEGUNDA EXECUÇÃO)
 for i in range(1):
     #clique no busca 1
@@ -75,6 +80,7 @@ for i in range(1):
 # 9. REPETIR PROCESSO 2X
 
 #screenWildth, screenHeight = pa.size()
+'''
 '''
 pyautogui.click(186, 439)
 pyautogui.click(186, 439)
