@@ -11,26 +11,41 @@ from pathlib import Path
 # ctr sft W = deslogar
 # ativar venv no vs code = c:/Users/alanis.oliveira/Documents/Desafio-de-Automacao/BWA-Chalenge/venv/Scripts/Activate.ps1
 
-lista2 = 'This_RockMa1io_Sh***_62'
+#lista2 = 'This_RockMa1io_Sh***_62' #nunca nem vi
+lista2 = 'This Is Roc Marciano'
+
 lista4 = 'Drop the bass!!'
+
+def pular():
+    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "pular.png")
+    pular = pa.locateOnScreen(str(path))
+    print(pular)
+    pa.click(pular)
+
+
+def voltar():
+
+    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "voltar.png")
+    pular = pa.locateOnScreen(str(path))
+    print(pular)
+    pa.click(pular)
+
 
 # 1. ABRIR SPOTIFY DESKTOP
 
-pa.PAUSE = 1
+pa.PAUSE = 3
 
 pa.press("win")
 pa.write("spotify")
 pa.press("enter")
 
+sleep(8)
 # 2. REALIZAR LOGIN
 
 path =  str (Path.cwd() / "Pyautogui" / "imagens" / "login" / "login.png") # da certo
-#path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "busca1.png") # da errado
 
 #vai tentar achar a imagem
 imagem = pa.locateOnScreen(path)
-#print(imagem)
-#print(dir(imagem))
 if(imagem == None):
     print('logado :)')
 
@@ -54,46 +69,135 @@ else:
     entrar = pa.locateOnScreen(str(path))
     pa.click(entrar)
 
-    wait(5)
+    sleep(4)
 
 # 3. PESQUISAR PLAYLIST 4 DA LISTA (PEDWQUISAR PLAYLIST 2 NA SEGUNDA EXECUÇÃO)
-i = 0 #2
-    #clique no busca 1
+# 9. REPETIR PROCESSO 2X
+
+
+#clique no busca 1
+for i in range (2): #2
+
+
+    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "busca1.png")
+    pesquisar = pa.locateOnScreen(str(path))
+    print(pesquisar)
+    pa.click(pesquisar)
+
+    #clique no busca 2
+    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "busca2.png")
+    pesquisar = pa.locateOnScreen(str(path))
+    print(pesquisar)
+    pa.click(pesquisar)
     
-path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "busca1.png")
-pesquisar = pa.locateOnScreen(str(path))
-print(pesquisar)
-pa.click(pesquisar)
+    if i == 0:
+        pa.write(lista4)
+        sleep(3)
+        path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "playlists.png")
+        playlist = pa.locateOnScreen(str(path), confidence= 0.9)
+        print(playlist)
+        pa.click(playlist)
 
-#clique no busca 2
-path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "busca2.png")
-pesquisar = pa.locateOnScreen(str(path))
-print(pesquisar)
-pa.click(pesquisar)
-if i == 0:
-    pa.write(lista4)
+        sleep(2)
+        path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "drop_the_bass.png")
+        music = pa.locateOnScreen(str(path))
+        print(music)
+        pa.click(music)
 
-    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "playlists.png")
-    playlist = pa.locateOnScreen(str(path))
-    print(playlist)
-    pa.click(playlist)
+    else:
+        pa.write(lista2)
+        sleep(3)
+        path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "playlists.png")
+        playlist = pa.locateOnScreen(str(path), confidence= 0.9)
+        print(playlist)
+        pa.click(playlist)
 
+        sleep(2)
+        path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "drop_the_bass.png")
+        music = pa.locateOnScreen(str(path))
+        print(music)
+        pa.click(music)
 
-    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "drop_the_bass.png")
+    # 4. AVANÇAR MUSICAS ATÉ APARECER ANÚNCIO (LIMITE DE 10 MUSICAS)baknurelte@gufum.com
+    # 5. AGUARDAR FIM DOS ANÚNCIOS
+    # play
+    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "play.png")
+    play = pa.locateOnScreen(str(path))
+    print(play)
+    pa.click(play)
+
+    for n in range(10):
+        try:
+            pular()
+        except:
+            try:
+                #se encontrar x, mate se não espere
+                path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "fechar.png")
+                fechar = pa.locateOnScreen(str(path), confidence= 0.9)
+                print(fechar)
+                pa.click(fechar)
+
+                sleep(35)
+                pular()
+
+            except:
+                sleep(35)
+                pular()
+
+    # 6. VOLTAR PARA MUSICA INICIAL DA PLAYLIST
+    pa.scroll(3)
+
+    path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "primeira.png")
     music = pa.locateOnScreen(str(path))
     print(music)
     pa.click(music)
 
 
-# 4. AVANÇAR MUSICAS ATÉ APARECER ANÚNCIO (LIMITE DE 10 MUSICAS)baknurelte@gufum.com
-# 5. AGUARDAR FIM DOS ANÚNCIOS
-# 6. VOLTAR PARA MUSICA INICIAL DA PLAYLIST
-# 7. AVANÇAR 2 MUSICAS
-# 8. VOLTAR 5 MUSICASbaknurelte@gufum.com
-# 9. REPETIR PROCESSO 2X
+    # 7. AVANÇAR 2 MUSICAS
+    for n in range(2):
+        try:
+            pular()
+        except:
+            try:
+                #se encontrar x, mate se não espere
+                path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "fechar.png")
+                fechar = pa.locateOnScreen(str(path), confidence= 0.9)
+                print(fechar)
+                pa.click(fechar)
 
-#screenWildth, screenHeight = pa.size()
-'''
-pyautogui.click(186, 439)
-pyautogui.click(186, 439)
-'''
+                sleep(35)
+
+                pular()
+
+            except:
+                sleep(50)
+                pular()
+
+    # 8. VOLTAR 5 MUSICASbaknurelte@gufum.com
+    for n in range(10):
+        try:
+            voltar()
+        except:
+            try:
+                #se encontrar x, mate se não espere
+                path = str (Path.cwd() / "Pyautogui" / "imagens" / "busca" / "fechar.png")
+                fechar = pa.locateOnScreen(str(path), confidence= 0.9)
+                print(fechar)
+                pa.click(fechar)
+
+                sleep(35)
+
+
+                voltar()
+
+            except:
+                sleep(50)
+                voltar()
+
+
+
+    #screenWildth, screenHeight = pa.size()
+    '''
+    pyautogui.click(186, 439)
+    pyautogui.click(186, 439)
+    '''
